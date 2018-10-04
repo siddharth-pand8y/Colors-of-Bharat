@@ -43,7 +43,7 @@
     <div id="signinButton">
         <span class="g-signin" 
               data-scope="openid profile email" 
-              data-clientid="443959507977-qeg7j2408kb82gv6b1hd6e36c2g0n3p4.apps.googleusercontent.com" 
+              data-clientid="443959507977-mj1b6n6a19psfiuqvc1lu7ujtstgdskq.apps" 
               data-redirecturi="postmessage" 
               data-accesstype="offline" 
               data-cookiepolicy="single_host_origin" data-callback="signInCallback" data-approvalprompt="force">

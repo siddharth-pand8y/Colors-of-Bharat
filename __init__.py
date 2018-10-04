@@ -9,6 +9,7 @@ from flask import (Flask,
                    make_response)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.orm import scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 from database_setup import Base, Category, Item, User
 from functools import wraps
@@ -26,19 +27,17 @@ app = Flask(__name__)
 
 # Connect to Database and create database session
 engine = create_engine(
-    'sqlite:///itemcatalog.db',
-    connect_args={
-        'check_same_thread': False})
+    'postgresql://catalog:catalog@localhost/catalog')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
-session = DBSession()
+session = scoped_session(DBSession)
 
 auth = HTTPBasicAuth
 # Read the client id from client_secrets.json file
-CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
+CLIENT_ID = json.loads(open('/var/www/catalog/catalog/client_secrets.json', 'r').read())[
     'web']['client_id']
-APPLICATION_NAME = "Bharatiya Krati"
+
 
 
 # Login Page
