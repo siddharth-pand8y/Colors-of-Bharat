@@ -191,7 +191,7 @@ def gdisconnect():
         return response
     print 'In gdisconnect access token is %s', access_token
     print 'User name is: '
-    print login_session['username']
+    print login_session['username'].encode('utf8')
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']    # noqa
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
@@ -280,7 +280,6 @@ def editCategory(category_id):
     arguments:
     category_id -- The id of the category to be edited
     """
-    cate
     editedCategory = session.query(Category).filter_by(
         id=category_id).one_or_none()
     if editedCategory.user_id != login_session['user_id']:
