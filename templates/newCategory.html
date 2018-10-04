@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='newItem.css') }}">
+
+    <link href="https://fonts.googleapis.com/css?family=Philosopher:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Limelight" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+</head>
+
+<body>
+    <div class="topbar">
+        <a href="/catalog">
+            <div class="logo">
+                <img src="{{url_for('static',filename='logo.png')}}" id='logopng'>
+            </div>
+        </a>
+        <div class="LoginButton">
+            {%if 'username' not in session %}
+            <a class="usrname" href="{{url_for('start')}}">Login </a> {% else %}
+            <a class="usrname" href=#>
+                <img src="{{session['picture']}}">
+                <p>{{(session['username'])}}</p>
+            </a>
+            <a class="logoutbutton" href="{{url_for('logout')}}">Logout </a> {% endif %}
+        </div>
+    </div>
+
+
+    <div class='main'>
+        <div class='flash'> {% with messages = get_flashed_messages() %}{% if messages %}
+
+            <ul>
+                {% for message in messages %}
+                <li><strong>{{message}}</strong></li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endwith %}</div>
+
+        <h1>Add a new Category</h1>
+
+
+
+        <form class='formbox' action="{{url_for('newCategory')}}" method='POST'>
+
+            <input class='nameinput' type='text' size=30 name='name' placeholder='Name'>
+
+            <label class='picturelabel' for='picture'>Enter the url of the picture</label>
+            <input class='pictureinput' type='text' placeholder="https://example.com/image.jpeg" name='picture'>
+
+            <textarea class='descriptioninput' type='text' name='description' placeholder='Description...'></textarea>
+
+            <input class='submitbutton' type='submit' value='Create'>
+
+            <a class='backbutton' href="{{url_for('showCategory')}}"><< BACK</a>
+
+        </form>
+
+    </div>
+</body>
